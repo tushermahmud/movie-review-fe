@@ -11,10 +11,10 @@ const Fav = () => {
   const [error, setError] = useState(null);
   const [triggerUpload, setTriggerUpload] = useState(undefined);
 
-  const { getAllMovies } = useAllAPI();
+  const { getFavourites } = useAllAPI();
 
   useEffect(() => {
-    getAllMovies().then((res) => {
+    getFavourites().then((res) => {
       setMovies(res?.data);
       setLoading(false);
     });
@@ -36,7 +36,7 @@ const Fav = () => {
 const MovieThumbnail = ({ movie }) => {
   return (
     <>
-      <MovieCard movie={movie} delete={true} delete={true} />
+      <MovieCard movie={movie} deleteFlag={true}/>
     </>
   );
 };

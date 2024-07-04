@@ -127,6 +127,80 @@ const useAllAPI = () => {
     }
   };
 
+  const addToFavourite = async (movieId) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.post(
+        `/user/${movieId}/add-to-favorites`,
+        {},
+        config
+      );
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeFromFavourite = async (movieId) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.post(
+        `/user/${movieId}/remove-from-favorites`,
+        {},
+        config
+      );
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getFavourites = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.get(`/user/favorites`, config);
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // const fetchUser =
 
   const logoutUser = async () => {
@@ -148,6 +222,9 @@ const useAllAPI = () => {
     addComment,
     addMovie,
     loading,
+    addToFavourite,
+    removeFromFavourite,
+    getFavourites,
   };
 };
 

@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, deleteflag }) => {
   return (
     <Card>
       <div className="flex items-center p-4">
