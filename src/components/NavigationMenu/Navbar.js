@@ -14,49 +14,24 @@ import {
 import { AuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@radix-ui/react-menubar";
+import { MenubarShortcut } from "../ui/menubar";
+import Cookies from "js-cookie";
 
 // const user = {
 //   name: "John Doe",
 //   avatar: "/path-to-avatar.jpg", // replace with the actual path to the avatar image
 // };
-
-const components = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
 
 export function NavigationMenuDemo() {
   const { loggedInUser } = React.useContext(AuthContext);
@@ -64,24 +39,7 @@ export function NavigationMenuDemo() {
   console.log({ imageName: `data:image/jpeg;base64,${loggedInUser?.photo}` });
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md">
-      <NavigationMenu>
-        <NavigationMenuList className="flex space-x-4">
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Favorite
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+      <NavigationMenu></NavigationMenu>
       <div className="flex items-center space-x-4">
         <NavigationMenu>
           <NavigationMenuList className="flex space-x-4">
@@ -94,20 +52,7 @@ export function NavigationMenuDemo() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex items-center space-x-2">
-          <Image
-            src={`data:image/jpeg;base64,${loggedInUser?.photo}`}
-            alt={`${loggedInUser?.name}'s avatar`}
-            className="w-8 h-8 rounded-full"
-            width={50}
-            height={50}
-          />
-          {/* <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar> */}
-          <span className="text-sm font-medium">{loggedInUser?.name}</span>
-        </div>
+        <MenubarDemo loggedInUser={loggedInUser} />
       </div>
     </nav>
   );
@@ -137,3 +82,35 @@ const ListItem = React.forwardRef(
   }
 );
 ListItem.displayName = "ListItem";
+
+export function MenubarDemo({ loggedInUser }) {
+  return (
+    <Menubar className="bg-white">
+      <MenubarMenu>
+        <div className="flex items-center space-x-2">
+          <MenubarTrigger>
+            <Image
+              src={`data:image/jpeg;base64,${loggedInUser?.photo}`}
+              alt={`${loggedInUser?.username}'s avatar`}
+              className="w-8 h-8 rounded-full"
+              width={50}
+              height={50}
+            />
+            <span className="text-sm font-medium">
+              {loggedInUser?.username}
+            </span>
+          </MenubarTrigger>
+        </div>
+        <MenubarContent>
+          <MenubarItem
+            onSelect={() => {
+              Cookies.remove("token");
+            }}
+          >
+            Logout
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  );
+}

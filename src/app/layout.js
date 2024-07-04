@@ -25,6 +25,7 @@ export default function RootLayout(props) {
           userPage={props.user}
           SignIn={props.children}
           loadingScreen={props.loadingScreen}
+          admin={props.admin}
         >
           {props.children}
         </AuthProvider>

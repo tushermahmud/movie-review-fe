@@ -17,14 +17,28 @@ const useAuthAPI = () => {
       setLoading(true);
       setError(null);
 
-      const response = await axiosInstance.post("/auth/login", {
-        email,
-        password,
-      });
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      };
 
-      localStorage.setItem("firstLogin", true);
+      const response = await axiosInstance.post(
+        "/user/login",
+        {
+          email,
+          password,
+        },
+        config
+      );
+
+      console.log({ response });
+      login(response?.data?.token);
+      Cookies.set("token", response?.data?.token);
+      // localStorage.setItem("firstLogin", true);
       // console.log({ loginData: response?.data?.accessToken });
-      login(response.data.role, response?.data?.accessToken);
+      // login(response.data.role, response?.data?.accessToken);
 
       return response;
     } catch (error) {

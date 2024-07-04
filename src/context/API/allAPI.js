@@ -4,18 +4,119 @@ import { useState } from "react";
 import axiosInstance from "./Base";
 import { useAuth } from "../AuthContext";
 import { useRouter } from "next/navigation";
-const useAuthAPI = () => {
-  const { login, logout } = useAuth();
+const useAllAPI = () => {
+  const { login, logout, token } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const getAllMovies = async (email, password) => {
+  const addMovie = async (payload) => {
     try {
       setLoading(true);
       setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.post("/movies", payload, config);
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      const response = await axiosInstance.get("/movies");
+  const getAllMovies = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.get("/movies", config);
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getSingleMovie = async (movieId) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.get(`/movies/${movieId}`, config);
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getComments = async (movieId) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.get(
+        `/comments/${movieId}/comments`,
+        config
+      );
+      console.log({ response });
+      setLoading(false);
+      return response;
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addComment = async (movieId, payload) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        withCredentials: true,
+      };
+      const response = await axiosInstance.post(
+        `/comments/${movieId}/create-comment`,
+        payload,
+        config
+      );
       console.log({ response });
       setLoading(false);
       return response;
@@ -40,7 +141,14 @@ const useAuthAPI = () => {
     }
   };
 
-  return { loading, error, loginUser, logoutUser };
+  return {
+    getAllMovies,
+    getSingleMovie,
+    getComments,
+    addComment,
+    addMovie,
+    loading,
+  };
 };
 
-export default useAuthAPI;
+export default useAllAPI;

@@ -1,17 +1,15 @@
 // pages/404.js
 "use client";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const NotFound = () => {
-  const storedState = localStorage.getItem("firstLogin");
+  const storedState = Cookies.get("token");
   const router = useRouter();
 
   useEffect(() => {
-    if (
-      !JSON.parse(storedState)?.session ||
-      !JSON.parse(storedState)?.isAuthenticated
-    ) {
+    if (!storedState) {
       router.push("/"); // Redirect to login page after logout
       //  // Redirect to login page after logout
       // if (pathname !== '/') {

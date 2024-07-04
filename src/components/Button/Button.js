@@ -1,4 +1,4 @@
-import { BsCartPlus } from 'react-icons/bs';
+import { BsCartPlus } from "react-icons/bs";
 
 export default function Button({
   text,
@@ -7,6 +7,7 @@ export default function Button({
   fill,
   onClick,
   icon,
+  otherProps,
 }) {
   return (
     <button
@@ -17,6 +18,7 @@ export default function Button({
           : fill &&
             `border border-blue py-2 px-8 rounded-lg bg-blue hover:bg-secondary transition-all text-white flex justify-center items-center w-full ${className}`
       }
+      {...otherProps}
     >
       {icon && <BsCartPlus className="w-[22px] h-[22px]" />}
       {text}

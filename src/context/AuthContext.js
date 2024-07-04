@@ -13,7 +13,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({
   children,
   userPage,
-  // admin,
+  admin,
   // programmer,
   // company,
   // recruiter,
@@ -39,37 +39,49 @@ export const AuthProvider = ({
   //   }
   // }, []);
 
+  // useEffect(() => {
+  //   const firstLogin = localStorage.getItem("firstLogin");
+  //   if (firstLogin) {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       withCredentials: true,
+  //     };
+  //     const refreshToken = async () => {
+  //       const res = await axiosInstance.post("/auth/refresh-token", config);
+
+  //       console.log({ "token:": res.data.accessToken });
+  //       setToken(res.data.accessToken);
+  //       setIsLogged(true);
+
+  //       setLoading(false);
+  //       // Cookies.set("refreshtoken", res.data.accessToken);
+  //       setTimeout(
+  //         () => {
+  //           refreshToken();
+  //         },
+  //         10 * 60 * 1000
+  //       );
+  //     };
+  //     refreshToken();
+  //   }
+
+  //   setLoading(false);
+  // }, []);
   useEffect(() => {
-    const firstLogin = localStorage.getItem("firstLogin");
-    if (firstLogin) {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      };
-      const refreshToken = async () => {
-        const res = await axiosInstance.post("/auth/refresh-token", config);
-
-        console.log({ "token:": res.data.accessToken });
-        setToken(res.data.accessToken);
-        setIsLogged(true);
-
-        setLoading(false);
-        // Cookies.set("refreshtoken", res.data.accessToken);
-        setTimeout(
-          () => {
-            refreshToken();
-          },
-          10 * 60 * 1000
-        );
-      };
-      refreshToken();
+    const cookieToken = Cookies.get("token");
+    if (cookieToken) {
+      setToken(cookieToken);
     }
-
-    setLoading(false);
   }, []);
 
+  const login = (accessToken) => {
+    setToken(accessToken);
+    setIsLogged(true);
+    AlertToast("success", "Login Succeed!");
+    // setState({ isAuthenticated: true, role, session });
+  };
   useEffect(() => {
     if (token) {
       const getUser = async () => {
@@ -77,16 +89,12 @@ export const AuthProvider = ({
           const config = {
             headers: {
               "Content-Type": "application/json",
+              "x-auth-token": token,
             },
             withCredentials: true,
           };
-          const res = await axiosInstance.get(
-            `/user/profile`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            },
-            config
-          );
+          const res = await axiosInstance.get(`/user/user-by-email`, config);
+          console.log("ekhane", res);
 
           if (!res?.error) {
             console.log({ Profile: res });
@@ -110,13 +118,6 @@ export const AuthProvider = ({
   // //   window.localStorage.setItem("authState", JSON.stringify(state));
   // // }, [state]);
 
-  const login = (role, accessToken) => {
-    setToken(accessToken);
-    // setLoginTriggered(Math.random());
-    AlertToast("success", "Login Succeed!");
-    // setState({ isAuthenticated: true, role, session });
-  };
-
   const logout = () => {
     // Cookies.set('connect.sid', null);
     Cookies.remove("connect.sid");
@@ -133,8 +134,9 @@ export const AuthProvider = ({
       {/* {isLogged && children} */}
       {loading && loadingScreen}
       {!isLogged && !loading && SignIn}
-      {isLogged && userPage}
-      {/* {state.role === "admin" && state.isAuthenticated && admin}
+      {isLogged && loggedInUser?.role === "user" && userPage}
+      {isLogged && loggedInUser?.role === "admin" && admin}
+      {/* 
       {state.role === "programmer" && state.isAuthenticated && programmer}
       {state.role === "company" && state.isAuthenticated && company}
       {state.role === "recruiter" && state.isAuthenticated && recruiter} */}
