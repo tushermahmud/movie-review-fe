@@ -1,7 +1,3 @@
-Here is the `README.md` file for your project:
-
-**`README.md`**
-
 ````markdown
 # Movie Listing App
 
@@ -17,13 +13,7 @@ This project is a movie listing application built using Next.js, Tailwind CSS, s
 
 ## Demo Video
 
-Watch the demo video of the project:
-
-[![Demo Video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
-
-Or click the button below to watch the demo video:
-
-[Watch Demo Video](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
+[![Watch Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-blue?style=for-the-badge)](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
 
 ## Installation
 
@@ -65,10 +55,6 @@ The `CommentSection` component displays comments for a movie and includes a form
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn](https://shadcn.dev/)
 - [react-hook-form](https://react-hook-form.com/)
-
-## License
-
-This project is licensed under the MIT License.
 
 ```
 
