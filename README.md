@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Here is the `README.md` file for your project:
 
-## Getting Started
+**`README.md`**
 
-First, run the development server:
+````markdown
+# Movie Listing App
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project is a movie listing application built using Next.js, Tailwind CSS, shadcn, and react-hook-form. The application includes features for viewing movie details, adding comments, marking movies as favorites, and an admin view for adding/removing movies.
+
+## Features
+
+- **Home Page**: Displays all movies as thumbnails. Users can click on a thumbnail to view movie details.
+- **Movie Detail Page**: Shows detailed information about the movie, including a comment section.
+- **Comment System**: Users can add comments to movies.
+- **Favorites**: Users can mark movies as favorites and view them on a separate tab.
+- **Admin View**: Admins can add and remove movies and comments.
+
+## Demo Video
+
+Watch the demo video of the project:
+
+[![Demo Video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
+
+Or click the button below to watch the demo video:
+
+[Watch Demo Video](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/movie-listing-app.git
+   cd movie-listing-app
+   ```
+````
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Components
+
+### AddMovieForm Component
+
+The `AddMovieForm` component is a form for adding movies, including fields for name, description, running time, thumbnail URL, rating, and duration. It uses `react-hook-form` for validation and displays a dialog using `shadcn`.
+
+### CommentSection Component
+
+The `CommentSection` component displays comments for a movie and includes a form for adding new comments. It uses `react-hook-form` for validation and displays comments in a card layout.
+
+## Dependencies
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn](https://shadcn.dev/)
+- [react-hook-form](https://react-hook-form.com/)
+
+## License
+
+This project is licensed under the MIT License.
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This `README.md` file includes an overview of the project, features, a link to the demo video, installation instructions, a description of key components, and the file structure. Adjust the repository URL and any other specifics as needed for your project.
+```

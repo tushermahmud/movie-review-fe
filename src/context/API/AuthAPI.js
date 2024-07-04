@@ -53,7 +53,7 @@ const useAuthAPI = () => {
   const logoutUser = async () => {
     try {
       // Call the backend logout endpoint
-      await axiosInstance.post("/auth/logout");
+      // await axiosInstance.post("/auth/logout");
 
       // Logout on the frontend
       logout();

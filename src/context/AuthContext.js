@@ -120,8 +120,7 @@ export const AuthProvider = ({
 
   const logout = () => {
     // Cookies.set('connect.sid', null);
-    Cookies.remove("connect.sid");
-    localStorage.removeItem("firstLogin");
+    Cookies.remove("token");
     setIsLogged(false);
     setToken(undefined);
     setLoggedInUser(undefined);

@@ -27,6 +27,7 @@ import {
 } from "@radix-ui/react-menubar";
 import { MenubarShortcut } from "../ui/menubar";
 import Cookies from "js-cookie";
+import useAuthAPI from "@/context/API/AuthAPI";
 
 // const user = {
 //   name: "John Doe",
@@ -84,6 +85,7 @@ const ListItem = React.forwardRef(
 ListItem.displayName = "ListItem";
 
 export function MenubarDemo({ loggedInUser }) {
+  const { logoutUser } = useAuthAPI();
   return (
     <Menubar className="bg-white">
       <MenubarMenu>
@@ -104,7 +106,7 @@ export function MenubarDemo({ loggedInUser }) {
         <MenubarContent>
           <MenubarItem
             onSelect={() => {
-              Cookies.remove("token");
+              logoutUser();
             }}
           >
             Logout
