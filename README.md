@@ -22,7 +22,7 @@ This project is a movie listing application built using Next.js, Tailwind CSS, s
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/movie-listing-app.git
+   git clone https://github.com/tushermahmud/movie-review-fe.git
    cd movie-listing-app
    ```
 ````
