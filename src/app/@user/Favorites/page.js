@@ -25,8 +25,7 @@ const Fav = () => {
 
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin - Add Movie</h1>
-      <AddMovieForm setTriggerUpload={setTriggerUpload} />
+      <h1 className="text-2xl font-bold mb-4">My Favorite Movie Movie</h1>
       {movies?.map((movie) => (
         <MovieThumbnail key={movie._id} movie={movie} />
       ))}
