@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, canRemove }) => {
   return (
     <Card>
       <div className="flex items-center p-4">
@@ -46,13 +46,15 @@ const MovieCard = ({ movie }) => {
               />
             </Link>
 
-            {/* { delete && <Button
-              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 hover:text-black transition duration-300"
-              text="Delete"
-              fill
-              // onClick={handleSubmit}
-              // disabled={loading}
-            />} */}
+            {canRemove && (
+              <Button
+                className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 hover:text-black transition duration-300"
+                text="Delete"
+                fill
+                // onClick={handleSubmit}
+                // disabled={loading}
+              />
+            )}
           </CardFooter>
         </div>
       </div>
