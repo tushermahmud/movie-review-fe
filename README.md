@@ -13,7 +13,7 @@ This project is a movie listing application built using Next.js, Tailwind CSS, s
 
 ## Demo Video
 
-[![Watch Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-blue?style=for-the-badge)](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV)
+Go to [Demo Video](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV) to see the project.
 
 ## Installation
 
