@@ -9,8 +9,29 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
+import useAllAPI from "@/context/API/allAPI";
+import { AlertToast } from "../Toast/AlertToast";
 
-const MovieCard = ({ movie, canRemove }) => {
+const MovieCard = ({
+  movie,
+  deleteFlag,
+  handleDelete,
+  fromFav,
+  favList = [],
+  setTriggerUpload,
+}) => {
+  const isFav = favList.findIndex((fav) => fav._id === movie._id) > -1;
+  const { addToFavorite } = useAllAPI();
+  const handleAddToFav = (movieId) => {
+    addToFavorite(movieId).then((res) => {
+      if (!res.error) {
+        setTriggerUpload(Math.random());
+        AlertToast("success", "Added Successfully!");
+      } else {
+        AlertToast("error", "Not Deleted!");
+      }
+    });
+  };
   return (
     <Card>
       <div className="flex items-center p-4">
@@ -32,9 +53,20 @@ const MovieCard = ({ movie, canRemove }) => {
             <p>{movie?.runningTime}</p>
             <p>Rating: 4.5</p>
           </CardContent>
-          <CardFooter>
-            <p>Add to Favorite</p>
-          </CardFooter>
+          {!fromFav && (
+            <CardFooter>
+              {isFav && (
+                <p onClick={() => handleDelete(movie._id)}>
+                  Remove From Favorite
+                </p>
+              )}
+              {!isFav && (
+                <p onClick={() => handleAddToFav(movie?._id)}>
+                  Add to Favorite
+                </p>
+              )}
+            </CardFooter>
+          )}
           <CardFooter>
             <Link href={`/movies/${movie._id}`}>
               <Button
@@ -46,12 +78,12 @@ const MovieCard = ({ movie, canRemove }) => {
               />
             </Link>
 
-            {canRemove && (
+            {deleteFlag && (
               <Button
-                className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 hover:text-black transition duration-300"
-                text="Delete"
+                className="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 hover:text-black transition duration-300"
+                text={fromFav ? "Remove From Favorite" : "Delete"}
                 fill
-                // onClick={handleSubmit}
+                onClick={() => handleDelete(movie._id)}
                 // disabled={loading}
               />
             )}
