@@ -1,3 +1,9 @@
+## Movie Listing App
+
+## Demo Video
+
+Go to [Demo Video](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV) to see the project.
+
 ````markdown
 # Movie Listing App
 
@@ -10,10 +16,6 @@ This project is a movie listing application built using Next.js, Tailwind CSS, s
 - **Comment System**: Users can add comments to movies.
 - **Favorites**: Users can mark movies as favorites and view them on a separate tab.
 - **Admin View**: Admins can add and remove movies and comments.
-
-## Demo Video
-
-Go to [Demo Video](https://1drv.ms/v/s!AmnyZ6A8HpjagYJmGuHBzsy89ZJrYw?e=vFdvwV) to see the project.
 
 ## Installation
 
